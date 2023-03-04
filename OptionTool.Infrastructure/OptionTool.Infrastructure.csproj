@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>8c01d5ba-ce84-429b-adb0-5709eb6fc19e</UserSecretsId>
   </PropertyGroup>
 
