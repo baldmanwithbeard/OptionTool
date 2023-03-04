@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using Microsoft.Data.SqlClient;
 using OptionTool.Domain;
 using OptionTool.Domain.Entities;
 
@@ -45,37 +46,6 @@ namespace OptionTool.Infrastructure.Repositories
         }
 
         /// <summary>
-        ///     Uses reflection to build the insert command for an object's corresponding SQL table.
-        /// </summary>
-        /// <typeparam name="T">Object Type, child of BaseEntity</typeparam>
-        /// <param name="insertObject">object instance</param>
-        /// <returns>SQL insert statement</returns>
-        /// <remarks>
-        ///     HACK: This method assumes that every non-Id property is a string (or other type that SQL uses single quotes for).
-        ///     <br/>If using this project as a template/guide, note that you may have to rewrite this method.
-        /// </remarks>
-        protected virtual string InsertCommandBuilder<T>(T insertObject) where T : BaseEntity
-        {
-            var insertCommand = new StringBuilder($"INSERT INTO {TableName} values(");
-
-            var properties = Activator.CreateInstance<T>().GetType().GetProperties().ToList();
-
-            // Since Id is inherited from base entity, it is always the last element in the collection returned by GetProperties(), so here
-            // it is taken from the end, added to the insertCommand, and removed from the list, so that all values are in column order.
-            insertCommand.Append($"{properties.Last().GetValue(insertObject)},");
-            properties.RemoveAt(properties.Count - 1);
-
-            foreach (var stringProperty in properties)
-            {
-                //HACK: this line assumes every property is a string, since it inserts the single quote before and after
-                insertCommand.Append($"'{stringProperty.GetValue(insertObject)}',");
-            }
-            insertCommand.Remove(insertCommand.Length - 1, 1).Append(")");
-
-            return insertCommand.ToString();
-        }
-
-        /// <summary>
         ///     Gets all records from database for specified object <typeparamref name="T"/> as enumerable of the object.
         /// </summary>
         /// <typeparam name="T">object type</typeparam>
@@ -89,6 +59,7 @@ namespace OptionTool.Infrastructure.Repositories
         protected T GetById<T>(int id) => DataRowMapToObject<T>(GetDataRow(id));
 
         /// <summary>
+        ///     Uses reflection to build the insert command for an object's corresponding SQL table.<br/>
         ///     Writes a new record to object <typeparamref name="T"/>'s corresponding table in database.
         /// </summary>
         /// <param name="insertObject">instance of object that needs to be written to database</param>
@@ -106,9 +77,17 @@ namespace OptionTool.Infrastructure.Repositories
         //TODO: may be better to move the error handling elsewhere and not return a string here
         protected virtual string Insert<T>(T insertObject) where T : BaseEntity
         {
+            var insertCommand = DatabaseConnection.GetCommandBuilder(TableName).GetInsertCommand(true);
+
+            var properties = Activator.CreateInstance<T>().GetType().GetProperties().ToList();
+
+            foreach (var property in properties)
+            {
+                insertCommand.Parameters[$"@{property.Name}"].Value = property.GetValue(insertObject) ?? DBNull.Value;
+            }
             try
             {
-                return DatabaseConnection.UpdateDataTableFromQuery(InsertCommandBuilder(insertObject)) == 1 ? "Created 1 record successfully" : "Failed without exception";
+                return insertCommand.ExecuteNonQuery() == 1 ? "Created 1 record successfully" : "Failed without exception";
             }
             catch (Exception e)
             {

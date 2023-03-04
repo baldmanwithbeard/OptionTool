@@ -13,8 +13,6 @@ namespace OptionTool.Infrastructure
     {
         private static IConfiguration Config => new ConfigurationBuilder().AddUserSecrets<BaseEntityRepository>().Build();
 
-        private static readonly string ConnectionString = Config["ConnectionString"];
-
         /// <summary>
         ///     Executes provided SQL query using connection obtained from <seealso cref="GetDatabaseConnection"/>.
         /// </summary>
@@ -56,9 +54,17 @@ namespace OptionTool.Infrastructure
         private static DbConnection GetDatabaseConnection()
         {
             //var databaseConnection = DbProviderFactories.GetFactory("Pervasive.Data.SqlClient").CreateConnection();
-            var databaseConnection = new SqlConnection(ConnectionString);
+            var connectionString = Config["AppSettings:ConnectionString"];
+            var databaseConnection = new SqlConnection(connectionString);
             databaseConnection.Open();
             return databaseConnection;
+        }
+
+        public static SqlCommandBuilder GetCommandBuilder(string tableName)
+        {
+            var connection = new SqlConnection(Config["AppSettings:ConnectionString"]);
+            connection.Open();
+            return new SqlCommandBuilder(new SqlDataAdapter($"SELECT * FROM {tableName}", connection));
         }
     }
 }

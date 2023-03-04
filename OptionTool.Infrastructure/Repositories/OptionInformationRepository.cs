@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using OptionTool.Domain.Entities;
 
 namespace OptionTool.Infrastructure.Repositories
@@ -49,7 +50,27 @@ namespace OptionTool.Infrastructure.Repositories
         /// <inheritdoc />
         protected override string Insert<T>(T insertObject)
         {
-            throw new NotImplementedException();
+            if (insertObject is not OptionInformation insertOptionInformation) throw new ArgumentException("insertObject must be instance of OptionInformation");
+
+            var insertCommand = DatabaseConnection.GetCommandBuilder(TableName).GetInsertCommand(true);
+            insertCommand.Parameters["@Id"].Value = insertOptionInformation.Id;
+            insertCommand.Parameters["@OptionId"].Value = (object)insertOptionInformation.OptionId ?? DBNull.Value;
+            insertCommand.Parameters["@OptionSequence"].Value = (object)insertOptionInformation.OptionSequence ?? DBNull.Value;
+            insertCommand.Parameters["@Label"].Value = insertOptionInformation.Label;
+            insertCommand.Parameters["@TranslationId"].Value = (object)insertOptionInformation.TranslationId ?? DBNull.Value;
+            insertCommand.Parameters["@ValueTypeId"].Value = (int)insertOptionInformation.OptionValueType;
+            insertCommand.Parameters["@ValueLookupObjectId"].Value = (object)insertOptionInformation.ValueLookupObject?.Id ?? DBNull.Value;
+            insertCommand.Parameters["@ValueEnumGroupId"].Value = (object)insertOptionInformation.ValueEnumGroup?.Id ?? DBNull.Value;
+            insertCommand.Parameters["@OptionTreeId"].Value = insertOptionInformation.OptionTree.Id;
+
+            try
+            {
+                return insertCommand.ExecuteNonQuery() == 1 ? "Created 1 record successfully" : "Failed without exception";
+            }
+            catch (Exception e)
+            {
+                return $"Failed with message: {e.Message}";
+            }
         }
 
         //TODO: write cascade insert method
@@ -64,7 +85,7 @@ namespace OptionTool.Infrastructure.Repositories
 
         /// <remarks>Wraps <seealso cref="BaseEntityRepository.Insert{T}"/>, specifying type as <seealso cref="OptionInformation"/>.</remarks>
         /// <inheritdoc cref="BaseEntityRepository.Insert{T}"/>
-        public string Insert(OptionInformation insertObject) => base.Insert(insertObject);
+        public string Insert(OptionInformation insertObject) => Insert<OptionInformation>(insertObject);
 
         /// <summary>
         ///     Calls <seealso cref="BaseEntityRepository.Delete"/>, deletes passed <see cref="OptionInformation"/> instance's corresponding record from database.

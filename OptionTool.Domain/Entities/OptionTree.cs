@@ -2,9 +2,9 @@
 {
     public class OptionTree : BaseEntity
     {
-        public string Group1 { get; set; }
-        public string Group2 { get; set; }
-        public string Group3 { get; set; }
-        public string Group4 { get; set; }
+        public string Category1 { get; set; }
+        public string Category2 { get; set; }
+        public string Category3 { get; set; }
+        public string Category4 { get; set; }
     }
 }

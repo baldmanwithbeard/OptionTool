@@ -33,7 +33,19 @@ namespace OptionTool.Infrastructure.Repositories
         /// <inheritdoc />
         protected override string Insert<T>(T insertObject)
         {
-            throw new NotImplementedException();
+            if (insertObject is not ValueEnumGroup insertValueEnumGroup) throw new ArgumentException("insertObject must be instance of ValueEnumGroup");
+
+            var insertCommand = DatabaseConnection.GetCommandBuilder(TableName).GetInsertCommand(true);
+            insertCommand.Parameters["@Id"].Value = insertValueEnumGroup.Id; //TODO: MUST check for enum items not being in db
+
+            try
+            {
+                return insertCommand.ExecuteNonQuery() == 1 ? "Created 1 record successfully" : "Failed without exception";
+            }
+            catch (Exception e)
+            {
+                return $"Failed with message: {e.Message}";
+            }
         }
 
         //TODO: write cascade insert method
@@ -60,7 +72,7 @@ namespace OptionTool.Infrastructure.Repositories
 
         /// <remarks>Wraps <seealso cref="BaseEntityRepository.Insert{T}"/>, specifying type as <seealso cref="ValueEnumGroup"/>.</remarks>
         /// <inheritdoc cref="BaseEntityRepository.Insert{T}"/>
-        public string Insert(ValueEnumGroup insertObject) => base.Insert(insertObject);
+        public string Insert(ValueEnumGroup insertObject) => Insert<ValueEnumGroup>(insertObject);
 
         /// <summary>
         ///     Calls <seealso cref="BaseEntityRepository.Delete"/>, deletes passed <see cref="ValueEnumGroup"/> instance's corresponding record from database.
