@@ -1,6 +1,6 @@
 ﻿namespace SampleSolution.Domain.Entities
 {
-    public class OptionLookup : BaseEntity
+    public class ValueLookupObject : BaseEntity
     {
         public string LookupObjectName { get; set; }
     }

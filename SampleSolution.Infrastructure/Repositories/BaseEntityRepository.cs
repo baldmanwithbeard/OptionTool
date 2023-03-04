@@ -27,7 +27,7 @@ namespace SampleSolution.Infrastructure.Repositories
         /// <remarks>
         ///     Will break if corresponding table's columns do not match object <typeparamref name="T"/>'s properties; must override this method<br/>
         ///     in complex objects, like ones with other objects as properties / needing foreign key mappings.<br/>
-        ///     (see <seealso cref="OptionDetailRepository.DataRowMapToObject{T}"/> for example of override)
+        ///     (see <seealso cref="OptionInformationRepository.DataRowMapToObject{T}"/> for example of override)
         /// </remarks>
         protected virtual T DataRowMapToObject<T>(DataRow dataRow)
         {
@@ -96,11 +96,11 @@ namespace SampleSolution.Infrastructure.Repositories
         /// <remarks>
         ///     Not exposed; must be wrapped/called in inheriting repository classes to ensure it is never passed an object type <typeparamref name="T"/><br/>
         ///     that does not correspond to current repository instance's <seealso cref="TableName"/><br/>
-        ///     (see <seealso cref="OptionGroupingRepository.Insert"/> for example of how to wrap/call)<br/><br/>
+        ///     (see <seealso cref="OptionTreeRepository.Insert"/> for example of how to wrap/call)<br/><br/>
         ///
         ///     Will break if corresponding table's columns do not match object <typeparamref name="T"/>'s properties; must override this method<br/>
         ///     in complex objects, like ones with other objects as properties / needing foreign key mappings.<br/>
-        ///     (see <seealso cref="OptionDetailRepository.Insert{T}"/> for example of override)
+        ///     (see <seealso cref="OptionInformationRepository.Insert{T}"/> for example of override)
         /// </remarks>
         //TODO: may be better to move the error handling elsewhere and not return a string here
         protected virtual string Insert<T>(T insertObject) where T : BaseEntity
@@ -121,7 +121,7 @@ namespace SampleSolution.Infrastructure.Repositories
         /// <returns> result message </returns>
         /// <remarks>
         ///     Not exposed; enforcing wrapping/calling in inheriting repository classes to ensure safe usage.<br/>
-        ///     (see <seealso cref="OptionGroupingRepository.Delete"/> for example of how to wrap/call)<br/><br/>
+        ///     (see <seealso cref="OptionTreeRepository.Delete"/> for example of how to wrap/call)<br/><br/>
         /// </remarks>
         //TODO: may be better to move the error handling elsewhere and not return a string here
         protected string Delete(int id)

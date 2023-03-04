@@ -9,7 +9,7 @@ namespace SampleSolution.Infrastructure.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            var optionGroupings = new OptionGroupingRepository().GetAll();
+            var optionGroupings = new OptionTreeRepository().GetAll();
         }
     }
 }

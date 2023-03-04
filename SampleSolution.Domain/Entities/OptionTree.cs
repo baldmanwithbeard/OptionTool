@@ -1,6 +1,6 @@
 ﻿namespace SampleSolution.Domain.Entities
 {
-    public class OptionGrouping : BaseEntity
+    public class OptionTree : BaseEntity
     {
         public string Group1 { get; set; }
         public string Group2 { get; set; }
