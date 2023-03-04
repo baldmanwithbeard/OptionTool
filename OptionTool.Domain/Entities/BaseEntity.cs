@@ -1,4 +1,4 @@
-﻿namespace OptionTool.Domain
+﻿namespace OptionTool.Domain.Entities
 {
     /// <summary> Used for normalizing object model and is basis for some generic methods in repository. </summary>
     public class BaseEntity

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using OptionTool.Domain;
+using OptionTool.Domain.Entities;
 
 namespace OptionTool.Infrastructure.Repositories
 {
