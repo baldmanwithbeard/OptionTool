@@ -1,5 +1,8 @@
-﻿using System.Data;
+﻿using Microsoft.Extensions.Configuration;
+using SampleSolution.Infrastructure.Repositories;
+using System.Data;
 using System.Data.Common;
+using Microsoft.Data.SqlClient;
 
 namespace SampleSolution.Infrastructure
 {
@@ -8,7 +11,9 @@ namespace SampleSolution.Infrastructure
     /// </summary>
     public static class DatabaseConnection
     {
-        private const string ConnectionString = "Server Name=serverName;Database Name=databaseName;User ID=userId;Password=password;";
+        private static IConfiguration Config => new ConfigurationBuilder().AddUserSecrets<BaseEntityRepository>().Build();
+
+        private static readonly string ConnectionString = Config["ConnectionString"];
 
         /// <summary>
         ///     Executes provided SQL query using connection obtained from <seealso cref="GetDatabaseConnection"/>.
@@ -50,8 +55,8 @@ namespace SampleSolution.Infrastructure
         /// <returns>Open <seealso cref="DbConnection"/></returns>
         private static DbConnection GetDatabaseConnection()
         {
-            var databaseConnection = DbProviderFactories.GetFactory("Pervasive.Data.SqlClient").CreateConnection();
-            databaseConnection!.ConnectionString = ConnectionString;
+            //var databaseConnection = DbProviderFactories.GetFactory("Pervasive.Data.SqlClient").CreateConnection();
+            var databaseConnection = new SqlConnection(ConnectionString);
             databaseConnection.Open();
             return databaseConnection;
         }

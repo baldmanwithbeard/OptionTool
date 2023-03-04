@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SampleSolution.Infrastructure.Repositories;
 
 namespace SampleSolution.Infrastructure.Tests
 {
@@ -8,6 +9,7 @@ namespace SampleSolution.Infrastructure.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            var optionGroupings = new OptionGroupingRepository().GetAll();
         }
     }
 }
