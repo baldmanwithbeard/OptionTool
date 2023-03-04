@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SampleSolution.Domain.Entities
+namespace OptionTool.Domain.Entities
 {
     public class ValueEnumGroup : BaseEntity
     {

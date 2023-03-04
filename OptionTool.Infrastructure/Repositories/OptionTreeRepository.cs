@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SampleSolution.Domain.Entities;
+using OptionTool.Domain.Entities;
 
-namespace SampleSolution.Infrastructure.Repositories
+namespace OptionTool.Infrastructure.Repositories
 {
     /// <summary>
     ///     Contains data layer for <seealso cref="OptionTree"/>.
@@ -9,7 +9,7 @@ namespace SampleSolution.Infrastructure.Repositories
     public class OptionTreeRepository : BaseEntityRepository
     {
         /// <inheritdoc />
-        protected override string TableName => TableNames.OptionTreeListGrouping;
+        protected override string TableName => TableNames.OptionTree;
 
         /// <inheritdoc cref="BaseEntityRepository.GetAll{T}"/>
         /// <remarks>Wraps <seealso cref="BaseEntityRepository.GetAll{T}"/>, specifying type as <seealso cref="OptionTree"/>.</remarks>

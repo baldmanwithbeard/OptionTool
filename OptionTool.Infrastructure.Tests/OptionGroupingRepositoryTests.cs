@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SampleSolution.Infrastructure.Repositories;
+using OptionTool.Infrastructure.Repositories;
 
-namespace SampleSolution.Infrastructure.Tests
+namespace OptionTool.Infrastructure.Tests
 {
     [TestClass]
     public class OptionGroupingRepositoryTests

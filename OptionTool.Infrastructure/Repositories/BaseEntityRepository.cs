@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using SampleSolution.Domain;
+using OptionTool.Domain;
 
-namespace SampleSolution.Infrastructure.Repositories
+namespace OptionTool.Infrastructure.Repositories
 {
     /// <summary>
     ///     Contains data layer for <seealso cref="BaseEntity"/>.

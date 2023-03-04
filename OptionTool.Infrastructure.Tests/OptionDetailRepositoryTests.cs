@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SampleSolution.Infrastructure.Tests
+namespace OptionTool.Infrastructure.Tests
 {
     [TestClass]
     public class OptionDetailRepositoryTests

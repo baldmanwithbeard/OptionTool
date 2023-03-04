@@ -1,6 +1,6 @@
-﻿namespace SampleSolution.Domain.Entities
+﻿namespace OptionTool.Domain.Entities
 {
-    public enum ValueType : int
+    public enum OptionValueType : int
     {
         BooleanOption = 0,
         StringOption = 1,

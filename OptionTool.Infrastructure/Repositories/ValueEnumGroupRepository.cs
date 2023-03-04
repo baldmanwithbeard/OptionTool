@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using SampleSolution.Domain.Entities;
+using OptionTool.Domain.Entities;
 
-namespace SampleSolution.Infrastructure.Repositories
+namespace OptionTool.Infrastructure.Repositories
 {
     /// <summary>
     ///     Contains data layer for <seealso cref="ValueEnumGroup"/>.
@@ -12,7 +12,7 @@ namespace SampleSolution.Infrastructure.Repositories
     public class ValueEnumGroupRepository : BaseEntityRepository
     {
         /// <inheritdoc />
-        protected override string TableName => TableNames.OptionEnumGroup;
+        protected override string TableName => TableNames.ValueEnumGroup;
 
         /// <remarks>Overridden to populate <seealso cref="ValueEnumGroup.EnumItems"/> off of a linking table.</remarks>
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace SampleSolution.Infrastructure.Repositories
         /// <param name="groupId"></param>
         private static List<ValueEnumItem> GetEnumItemsByEnumGroupId(int groupId)
         {
-            var dataTable = DatabaseConnection.GetDataTableFromQuery($"SELECT * FROM {TableNames.OptionEnumItemGroup} WHERE GroupId = {groupId}");
+            var dataTable = DatabaseConnection.GetDataTableFromQuery($"SELECT * FROM {TableNames.ValueEnumItemGroup} WHERE GroupId = {groupId}");
 
             return (from DataRow dataRow in dataTable.Rows select new ValueEnumItemRepository().GetById((int)dataRow["ItemId"])).ToList();
         }

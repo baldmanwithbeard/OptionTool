@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSolution.Domain", "SampleSolution.Domain\SampleSolution.Domain.csproj", "{D801080B-8B5C-4B0F-9CBA-1FE15BB39286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionTool.Domain", "OptionTool.Domain\OptionTool.Domain.csproj", "{D801080B-8B5C-4B0F-9CBA-1FE15BB39286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSolution.Infrastructure", "SampleSolution.Infrastructure\SampleSolution.Infrastructure.csproj", "{F29177AF-B525-4001-9B27-53437E1BE7E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionTool.Infrastructure", "OptionTool.Infrastructure\OptionTool.Infrastructure.csproj", "{F29177AF-B525-4001-9B27-53437E1BE7E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{30AE8A19-B734-465D-BCE9-AEB1A0CD4623}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F52CB85A-18B3-4D9C-94E9-B3606669237C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSolution.Infrastructure.Tests", "SampleSolution.Infrastructure.Tests\SampleSolution.Infrastructure.Tests.csproj", "{1514FA32-681C-4089-9178-2C06D96BADA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionTool.Infrastructure.Tests", "OptionTool.Infrastructure.Tests\OptionTool.Infrastructure.Tests.csproj", "{1514FA32-681C-4089-9178-2C06D96BADA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

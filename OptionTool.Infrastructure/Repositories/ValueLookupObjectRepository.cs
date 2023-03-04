@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SampleSolution.Domain.Entities;
+using OptionTool.Domain.Entities;
 
-namespace SampleSolution.Infrastructure.Repositories
+namespace OptionTool.Infrastructure.Repositories
 {
     /// <summary>
     ///     Contains data layer for <seealso cref="ValueLookupObject"/>.
@@ -9,7 +9,7 @@ namespace SampleSolution.Infrastructure.Repositories
     public class ValueLookupObjectRepository : BaseEntityRepository
     {
         /// <inheritdoc />
-        protected override string TableName => TableNames.OptionLookup;
+        protected override string TableName => TableNames.ValueLookupObject;
 
         /// <inheritdoc cref="BaseEntityRepository.GetById{T}"/>
         /// <remarks>Wraps <seealso cref="BaseEntityRepository.GetById{T}"/>, specifying type as <seealso cref="ValueLookupObject"/>.</remarks>

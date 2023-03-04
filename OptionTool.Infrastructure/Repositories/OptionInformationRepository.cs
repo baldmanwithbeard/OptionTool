@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using SampleSolution.Domain.Entities;
-using ValueType = SampleSolution.Domain.Entities.ValueType;
+using OptionTool.Domain.Entities;
 
-namespace SampleSolution.Infrastructure.Repositories
+namespace OptionTool.Infrastructure.Repositories
 {
     /// <summary>
     ///     Contains data layer for <seealso cref="OptionInformation"/>.
@@ -12,7 +11,7 @@ namespace SampleSolution.Infrastructure.Repositories
     public class OptionInformationRepository : BaseEntityRepository
     {
         /// <inheritdoc />
-        protected override string TableName => TableNames.OptionDetail;
+        protected override string TableName => TableNames.OptionInformation;
 
         /// <remarks>Overridden to map foreign keys of <seealso cref="OptionInformation"/></remarks>
         /// <inheritdoc />
@@ -28,8 +27,8 @@ namespace SampleSolution.Infrastructure.Repositories
             objectInstance.GetType().GetProperty("TranslationId")!.SetValue(objectInstance, dataRow["TranslationId"] is DBNull ? null : dataRow["TranslationId"]);
 
             //foreign key properties
-            objectInstance.GetType().GetProperty("ValueType")!.SetValue(objectInstance,
-                (ValueType)(int)dataRow["ValueTypeId"]);
+            objectInstance.GetType().GetProperty("OptionValueType")!.SetValue(objectInstance,
+                (OptionValueType)(int)dataRow["ValueTypeId"]);
 
             objectInstance.GetType().GetProperty("ValueLookupObject")!.SetValue(objectInstance,
                 dataRow["ValueLookupObjectId"] is int ? new ValueLookupObjectRepository().GetById((int)dataRow["ValueLookupObjectId"]) : null);

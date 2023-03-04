@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SampleSolution.Domain\SampleSolution.Domain.csproj" />
+    <Folder Include="Secrets\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Secrets\" />
+    <ProjectReference Include="..\OptionTool.Domain\OptionTool.Domain.csproj" />
   </ItemGroup>
 
 </Project>

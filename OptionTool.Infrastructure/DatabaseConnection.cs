@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using SampleSolution.Infrastructure.Repositories;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using OptionTool.Infrastructure.Repositories;
 
-namespace SampleSolution.Infrastructure
+namespace OptionTool.Infrastructure
 {
     /// <summary>
     ///     Used for accessing Pervasive database and sending commands/queries.
